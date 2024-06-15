@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar CEP</title>
+</head>
+<body>
+    <h1>Adicionar CEP</h1>
+    <form id="cepForm">
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" required>
+        <button type="submit">Adicionar</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('cepForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const cep = document.getElementById('cep').value;
+            fetch('/adicionar_cep', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ cep: cep })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.textContent = data.message || data.error;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        });
+    </script>
+</body>
+</html>
