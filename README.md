@@ -11,6 +11,7 @@ Uma API - Python ao adicionar um CEP utilizando o método POST, salva o mesmo em
 O Robô principal escrito em Python, possui duas threads que irão trabalhar de forma coordenada e simultânea(programação concorrente) utilizando filas no banco de dados NoSQL Redis;
 
 1° thread: insere o cep na fila do Redis;
+
 2° thread: processa o dado(CEP) e exclui da fila Redis, acessa a API dos correios e recupera os dados de localização, onde serão armazenados no banco de dados relacional MySQL;
 
 ## Tecnologias
